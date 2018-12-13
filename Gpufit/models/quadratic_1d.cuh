@@ -40,8 +40,8 @@ __device__ void calculate_quadratic1d(
     REAL * current_derivatives = derivative + point_index;
 
     //vertex form derivatives
-    current_derivatives[0 * n_points] = (x - parameters[1])*(x - parameters[1]); //why both of these negative?
-    current_derivatives[1 * n_points] = 2.0*parameters[0]*(parameters[1] - x); //why both of these negative?
+    current_derivatives[0 * n_points] = (x - parameters[1])*(x - parameters[1]);
+    current_derivatives[1 * n_points] = 2.0*parameters[0]*(parameters[1] - x);
     current_derivatives[2 * n_points] = 1.0;
 }
 
