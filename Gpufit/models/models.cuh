@@ -9,6 +9,8 @@
 #include "cauchy_2d_elliptic.cuh"
 #include "fletcher_powell_helix.cuh"
 #include "brown_dennis.cuh"
+#include "sin_1d.cuh"
+#include "quadratic_1d.cuh"
 
 __device__ void calculate_model(
     ModelID const model_id,
@@ -49,6 +51,12 @@ __device__ void calculate_model(
     case BROWN_DENNIS:
         calculate_brown_dennis(parameters, n_fits, n_points, value, derivative, point_index, fit_index, chunk_index, user_info, user_info_size);
         break;
+    case SIN_1D:
+        calculate_sin1d(parameters, n_fits, n_points, value, derivative, point_index, fit_index, chunk_index, user_info, user_info_size);
+        break;
+    case QUAD_1D:
+        calculate_quadratic1d(parameters, n_fits, n_points, value, derivative, point_index, fit_index, chunk_index, user_info, user_info_size);
+        break;
     default:
         break;
     }
@@ -66,6 +74,8 @@ void configure_model(ModelID const model_id, int & n_parameters, int & n_dimensi
     case LINEAR_1D:             n_parameters = 2; n_dimensions = 1; break;
     case FLETCHER_POWELL_HELIX:       n_parameters = 3; n_dimensions = 1; break;
     case BROWN_DENNIS:          n_parameters = 4; n_dimensions = 1; break;
+    case SIN_1D:              n_parameters = 4; n_dimensions = 1; break;
+    case QUAD_1D:             n_parameters = 3; n_dimensions = 1; break;
     default:                                                        break;
     }
 }
